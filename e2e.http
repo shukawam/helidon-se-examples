@@ -1,0 +1,11 @@
+@localhost = http://localhost:8080
+
+### Greet
+GET {{localhost}}/greet HTTP/1.1
+
+### Health Check
+GET {{localhost}}/health HTTP/1.1
+
+### Metrics
+GET {{localhost}}/metrics HTTP/1.1
+Accept: application/json

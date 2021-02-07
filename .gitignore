@@ -2,5 +2,12 @@
 .helidon
 .classpath
 
+# VSCode
+.settings/
+
 # Maven
 target/
+
+# Gradle
+.gradle/
+build/

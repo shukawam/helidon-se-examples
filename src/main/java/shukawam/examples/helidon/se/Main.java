@@ -3,7 +3,6 @@ package shukawam.examples.helidon.se;
 
 import io.helidon.common.LogConfig;
 import io.helidon.config.Config;
-import io.helidon.dbclient.DbClient;
 import io.helidon.health.HealthSupport;
 import io.helidon.health.checks.HealthChecks;
 import io.helidon.media.jsonp.JsonpSupport;
@@ -12,7 +11,6 @@ import io.helidon.webserver.Routing;
 import io.helidon.webserver.WebServer;
 import shukawam.examples.helidon.se.config.ConfigService;
 import shukawam.examples.helidon.se.greet.GreetService;
-import shukawam.examples.helidon.se.jdbc.JdbcService;
 
 import java.lang.management.ManagementFactory;
 
@@ -98,12 +96,6 @@ public final class Main {
         // Helidon - Config
         ConfigService configService = new ConfigService(config);
 
-        // Helidon - DBClient
-        Config dbConfig = config.get("db");
-        System.out.println("ok");
-        DbClient dbClient = DbClient.builder(dbConfig).build();
-        JdbcService jdbcService = new JdbcService(dbClient);
-
         return Routing.builder()
                 // Health at "/health"
                 .register(health)
@@ -113,8 +105,6 @@ public final class Main {
                 .register("/greet", greetService)
                 // Config
                 .register("/config", configService)
-                // Helidon DBClient
-                .register("/jdbc", jdbcService)
                 .build();
     }
 }

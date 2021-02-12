@@ -1,5 +1,5 @@
 
-package shukawam.examples.helidon.se;
+package shukawam.examples.helidon.se.greet;
 
 import java.util.Collections;
 import java.util.logging.Logger;
@@ -20,7 +20,7 @@ public class GreetService implements Service {
 
     private final String greeting;
 
-    GreetService(Config config) {
+    public GreetService(Config config) {
         greeting = config.get("app.greeting").asString().orElse("Ciao");
     }
 

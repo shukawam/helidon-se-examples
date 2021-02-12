@@ -75,4 +75,13 @@ public class MainTest {
                 .toCompletableFuture()
                 .get();
     }
+
+    @Test
+    public void testConfigService() throws Exception {
+        webClient.get()
+                .path("/config/1")
+                .request(JsonObject.class)
+                .thenAccept(jsonObject -> Assertions.assertEquals("config service works!!", jsonObject.getString("message")))
+                .toCompletableFuture();
+    }
 }

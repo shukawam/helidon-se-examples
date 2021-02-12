@@ -1,7 +1,31 @@
-
 app:
   greeting: "Hello"
+  config: "config service works!!"
 
 server:
   port: 8080
   host: 0.0.0.0
+
+db:
+  source: "jdbc"
+  connection:
+    #
+    # Oracle configuration.
+    #
+    url: jdbc:mysql://168.138.212.177:3306/sandbox?userSSL=false
+    username: sandbox
+    password: passw0rd
+    poolName: mysql
+
+    #
+    # MySQL configuration.
+    #
+#    url: jdbc:oracle:thin@_high?TNS_ADMIN=C:/Work/05_oci/wallets/Wallet_SANDBOX
+#    username: sandbox
+#    password: Passw0rd12345
+#    poolName: oracle
+  statements:
+    ## ping statement
+    ping: "DO 0"
+    # Select all items.
+    select-all-items: "SELECT * FROM ITEM"

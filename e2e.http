@@ -9,3 +9,9 @@ GET {{localhost}}/health HTTP/1.1
 ### Metrics
 GET {{localhost}}/metrics HTTP/1.1
 Accept: application/json
+
+### Config
+GET {{localhost}}/config/1 HTTP/1.1
+
+### Config
+GET {{localhost}}/config/2 HTTP/1.1

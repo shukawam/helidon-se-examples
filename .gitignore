@@ -11,3 +11,7 @@ target/
 # Gradle
 .gradle/
 build/
+
+# Idea
+.idea/
+*.iml

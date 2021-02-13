@@ -7,10 +7,12 @@ import io.helidon.health.HealthSupport;
 import io.helidon.health.checks.HealthChecks;
 import io.helidon.media.jsonp.JsonpSupport;
 import io.helidon.metrics.MetricsSupport;
+import io.helidon.openapi.OpenAPISupport;
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.WebServer;
 import shukawam.examples.helidon.se.config.ConfigService;
 import shukawam.examples.helidon.se.greet.GreetService;
+import shukawam.examples.helidon.se.openapi.OpenAPIService;
 
 import java.lang.management.ManagementFactory;
 
@@ -84,18 +86,16 @@ public final class Main {
     private static Routing createRouting(Config config) {
         // Helidon - Metrics
         MetricsSupport metrics = MetricsSupport.create();
-
         // Default Service
         GreetService greetService = new GreetService(config);
-
         // Helidon - Health Check
         HealthSupport health = HealthSupport.builder()
                 .addLiveness(HealthChecks.healthChecks())   // Adds a convenient set of checks
                 .build();
-
         // Helidon - Config
         ConfigService configService = new ConfigService(config);
-
+        // Helidon - OpenAPI
+        OpenAPIService openAPIService = new OpenAPIService();
         return Routing.builder()
                 // Health at "/health"
                 .register(health)
@@ -105,6 +105,9 @@ public final class Main {
                 .register("/greet", greetService)
                 // Config
                 .register("/config", configService)
+                // OpenAPI support
+                .register(OpenAPISupport.create(config.get(OpenAPISupport.Builder.CONFIG_KEY)))
+                .register("/openapi", openAPIService)
                 .build();
     }
 }

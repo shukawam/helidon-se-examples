@@ -1,7 +1,16 @@
+# Application configuration.
 app:
   greeting: "Hello"
   config: "config service works!!"
 
+# Server configuration.
 server:
   port: 8080
   host: 0.0.0.0
+
+# OpenAPI configuration.
+openapi:
+  filter: shukawam.examples.helidon.se.openapi.OpenAPIFilter
+  model:
+    reader: shukawam.examples.helidon.se.openapi.OpenAPIModelReader
+  web-context: /openapi

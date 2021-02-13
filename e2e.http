@@ -11,7 +11,10 @@ GET {{localhost}}/metrics HTTP/1.1
 Accept: application/json
 
 ### Config
-GET {{localhost}}/config/1 HTTP/1.1
+GET {{localhost}}/config HTTP/1.1
 
-### Config
-GET {{localhost}}/config/2 HTTP/1.1
+### OpenAPI
+GET {{localhost}}/openapi HTTP/1.1
+
+### OpenAPI implement Filter
+GET {{localhost}}/openapi/test HTTP/1.1

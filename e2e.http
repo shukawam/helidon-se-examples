@@ -5,6 +5,8 @@ GET {{localhost}}/greet HTTP/1.1
 
 ### Health Check
 GET {{localhost}}/health HTTP/1.1
+Origin: http://there.com
+# Origin: http://other.com
 
 ### Metrics
 GET {{localhost}}/metrics HTTP/1.1
@@ -18,3 +20,25 @@ GET {{localhost}}/openapi HTTP/1.1
 
 ### OpenAPI implement Filter
 GET {{localhost}}/openapi/test HTTP/1.1
+
+### DB Client
+GET {{localhost}}/jdbc/index HTTP/1.1
+
+### Get all item
+GET {{localhost}}/jdbc/item HTTP/1.1
+
+### Get a single item by id
+GET {{localhost}}/jdbc/item/1 HTTP/1.1
+
+### Get a single item by name
+GET {{localhost}}/jdbc/item/name/ジーパン HTTP/1.1
+
+### Create a new item.
+POST {{localhost}}/jdbc/item HTTP/1.1
+
+{
+    "id": 101,
+    "name": "香水",
+    "price": 15000,
+    "itemTypeCode": 4
+}

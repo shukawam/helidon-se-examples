@@ -14,3 +14,35 @@ openapi:
   model:
     reader: shukawam.examples.helidon.se.openapi.OpenAPIModelReader
   web-context: /openapi
+
+# Database connection settings
+db:
+  source: jdbc
+  connection:
+    # ATP settings
+    url: jdbc:oracle:thin:@sandbox_high?TNS_ADMIN=C:/Work/05_oci/wallets/Wallet_SANDBOX
+    username: sandbox
+    password: Passw0rd12345
+    poolName: oracle
+  services:
+    metrics:
+      - type: METER
+  # Query
+  statements:
+    select-all-item: "SELECT ID, NAME, PRICE, ITEM_TYPE_CODE FROM ITEM"
+    select-item-by-id: "SELECT ID, NAME, PRICE, ITEM_TYPE_CODE FROM ITEM WHERE ID = :id"
+    select-item-by-name: "SELECT ID, NAME, PRICE, ITEM_TYPE_CODE FROM ITEM WHERE NAME = :name"
+    create-item: "INSERT INTO ITEM(ID, NAME, PRICE, ITEM_TYPE_CODE) VALUES(?, ?, ? ,?)"
+    update-item: ""
+    delete-item-by-id: ""
+    select-all-item-type: ""
+    select-item-type-by-id: ""
+    select-item-type-by-name: ""
+    create-item-type: ""
+    update-item-type: ""
+    delete-item-type-by-id: ""
+
+# CORS build in
+health:
+  cors:
+    allow-origins: [http://there.com]

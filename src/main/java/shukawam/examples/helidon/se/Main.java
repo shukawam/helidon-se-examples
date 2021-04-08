@@ -3,6 +3,7 @@ package shukawam.examples.helidon.se;
 
 import io.helidon.common.LogConfig;
 import io.helidon.config.Config;
+import io.helidon.dbclient.DbClient;
 import io.helidon.health.HealthSupport;
 import io.helidon.health.checks.HealthChecks;
 import io.helidon.media.jsonp.JsonpSupport;
@@ -12,6 +13,7 @@ import io.helidon.webserver.Routing;
 import io.helidon.webserver.WebServer;
 import shukawam.examples.helidon.se.config.ConfigService;
 import shukawam.examples.helidon.se.greet.GreetService;
+import shukawam.examples.helidon.se.jdbc.JdbcService;
 import shukawam.examples.helidon.se.openapi.OpenAPIService;
 
 import java.lang.management.ManagementFactory;
@@ -84,30 +86,25 @@ public final class Main {
      * @return routing configured with JSON support, a health check, and a service
      */
     private static Routing createRouting(Config config) {
-        // Helidon - Metrics
-        MetricsSupport metrics = MetricsSupport.create();
-        // Default Service
-        GreetService greetService = new GreetService(config);
-        // Helidon - Health Check
-        HealthSupport health = HealthSupport.builder()
-                .addLiveness(HealthChecks.healthChecks())   // Adds a convenient set of checks
+        HealthSupport healthSupport = HealthSupport.builder()
+                .config(config.get("health"))
+                .addLiveness(HealthChecks.healthChecks())
                 .build();
-        // Helidon - Config
-        ConfigService configService = new ConfigService(config);
-        // Helidon - OpenAPI
-        OpenAPIService openAPIService = new OpenAPIService();
         return Routing.builder()
                 // Health at "/health"
-                .register(health)
+                // .register(HealthSupport.builder().addLiveness(HealthChecks.healthChecks()).build())
+                .register(healthSupport)
                 // Metrics at "/metrics"
-                .register(metrics)
+                .register(MetricsSupport.create())
                 // Default
-                .register("/greet", greetService)
+                .register("/greet", new GreetService(config))
                 // Config
-                .register("/config", configService)
+                .register("/config", new ConfigService(config))
                 // OpenAPI support
                 .register(OpenAPISupport.create(config.get(OpenAPISupport.Builder.CONFIG_KEY)))
-                .register("/openapi", openAPIService)
+                .register("/openapi", new OpenAPIService())
+                // DB Client
+                .register("/jdbc", new JdbcService(DbClient.builder(config.get("db")).build()))
                 .build();
     }
 }

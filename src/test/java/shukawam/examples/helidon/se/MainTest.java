@@ -84,4 +84,18 @@ public class MainTest {
                 .thenAccept(jsonObject -> Assertions.assertEquals("config service works!!", jsonObject.getString("message")))
                 .toCompletableFuture();
     }
+
+    @Test
+    public void testJdbcService() throws Exception {
+        var firstItem = "{\n" +
+                "  \"PRICE\": 200,\n" +
+                "  \"ITEM_TYPE_CODE\": 1,\n" +
+                "  \"ID\": 1,\n" +
+                "  \"NAME\": \"ビール\"\n" +
+                "}";
+        webClient.get()
+                .path("/jdbc/item/1")
+                .request(JsonObject.class)
+                .thenAccept(jsonObject -> Assertions.assertEquals(firstItem, jsonObject));
+    }
 }

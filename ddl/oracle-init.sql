@@ -1,0 +1,201 @@
+DROP TABLE ITEM;
+
+DROP TABLE ITEM_TYPE;
+
+CREATE TABLE ITEM_TYPE (
+    ID INTEGER PRIMARY KEY,
+    NAME VARCHAR2(256) NOT NULL
+);
+
+INSERT INTO
+    ITEM_TYPE
+VALUES
+    (1, '飲料');
+
+INSERT INTO
+    ITEM_TYPE
+VALUES
+    (2, '食品');
+
+INSERT INTO
+    ITEM_TYPE
+VALUES
+    (3, 'オーディオ');
+
+INSERT INTO
+    ITEM_TYPE
+VALUES
+    (4, '洋服');
+
+INSERT INTO
+    ITEM_TYPE
+VALUES
+    (5, '本・雑誌');
+
+CREATE TABLE ITEM (
+    ID INTEGER PRIMARY KEY,
+    NAME VARCHAR2(256) NOT NULL,
+    PRICE INTEGER NOT NULL,
+    ITEM_TYPE_CODE INTEGER NOT NULL,
+    CONSTRAINT FK_A FOREIGN KEY(ITEM_TYPE_CODE) REFERENCES ITEM_TYPE(ID)
+);
+
+INSERT INTO
+    ITEM
+VALUES
+    (1, 'ビール', 200, 1);
+
+INSERT INTO
+    ITEM
+VALUES
+    (2, '赤ワイン', 2500, 1);
+
+INSERT INTO
+    ITEM
+VALUES
+    (3, '白ワイン', 2500, 1);
+
+INSERT INTO
+    ITEM
+VALUES
+    (4, 'ウイスキー', 3000, 1);
+
+INSERT INTO
+    ITEM
+VALUES
+    (5, '水', 98, 1);
+
+INSERT INTO
+    ITEM
+VALUES
+    (6, 'コーラ', 150, 1);
+
+INSERT INTO
+    ITEM
+VALUES
+    (7, 'パスタ', 200, 2);
+
+INSERT INTO
+    ITEM
+VALUES
+    (8, '米5kg', 2000, 2);
+
+INSERT INTO
+    ITEM
+VALUES
+    (9, 'パン', 100, 2);
+
+INSERT INTO
+    ITEM
+VALUES
+    (10, '肉', 1000, 2);
+
+INSERT INTO
+    ITEM
+VALUES
+    (11, '魚', 500, 2);
+
+INSERT INTO
+    ITEM
+VALUES
+    (12, '野菜', 200, 2);
+
+INSERT INTO
+    ITEM
+VALUES
+    (13, 'イヤホン', 20000, 3);
+
+INSERT INTO
+    ITEM
+VALUES
+    (14, 'ヘッドホン', 30000, 3);
+
+INSERT INTO
+    ITEM
+VALUES
+    (15, 'スピーカー', 50000, 3);
+
+INSERT INTO
+    ITEM
+VALUES
+    (16, 'ギター', 220000, 3);
+
+INSERT INTO
+    ITEM
+VALUES
+    (17, 'ベース', 160000, 3);
+
+INSERT INTO
+    ITEM
+VALUES
+    (18, 'ドラム', 100000, 3);
+
+INSERT INTO
+    ITEM
+VALUES
+    (19, 'コート', 260000, 4);
+
+INSERT INTO
+    ITEM
+VALUES
+    (20, 'Tシャツ', 10000, 4);
+
+INSERT INTO
+    ITEM
+VALUES
+    (21, 'Yシャツ', 2000, 4);
+
+INSERT INTO
+    ITEM
+VALUES
+    (22, 'ジーパン', 50000, 4);
+
+INSERT INTO
+    ITEM
+VALUES
+    (23, 'パーカー', 20000, 4);
+
+INSERT INTO
+    ITEM
+VALUES
+    (24, 'セーター', 25000, 4);
+
+INSERT INTO
+    ITEM
+VALUES
+    (25, '漫画', 500, 5);
+
+INSERT INTO
+    ITEM
+VALUES
+    (26, '雑誌', 500, 5);
+
+INSERT INTO
+    ITEM
+VALUES
+    (27, 'NATURE', 2000, 5);
+
+INSERT INTO
+    ITEM
+VALUES
+    (28, '小説', 1000, 5);
+
+INSERT INTO
+    ITEM
+VALUES
+    (29, '辞書', 7000, 5);
+
+INSERT INTO
+    ITEM
+VALUES
+    (30, '四季報', 2000, 5);
+
+COMMIT;
+
+SELECT
+    ID,
+    NAME,
+    PRICE,
+    ITEM_TYPE_CODE
+FROM
+    ITEM;
